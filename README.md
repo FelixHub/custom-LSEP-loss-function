@@ -4,7 +4,7 @@ This is a implementation of the log-sum-exp pairwise (LSEP) loss function for mu
 
 The LSEP loss function is described as follow :
   
-  ![alt text] (https://raw.githubusercontent.com/FelixHub/custom-LSEP-loss-function/blob/master/equationlsep.png)
+  ![equation](master/equationlsep.png)
 
 
 where 𝑓(𝑥) is the label prediction function that maps the document vector 𝑥 into K-dimensional label space representing the confidence scores of each label (K equals to number of unique labels). 𝑓u(𝑥i) and 𝑓v(𝑥i) are the 𝑣 and 𝑢 -th element of confidence 
