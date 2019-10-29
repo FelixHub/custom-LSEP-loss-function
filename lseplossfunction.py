@@ -21,19 +21,19 @@ def customLoss(weights_list,num_classes) :
         
         M_unit = tf.ones((batchsize, num_classes)) 
         
-        # here's the class weights 
+        # here's the class weights, just remove  the right term of multiplication if not needed
         M1 = ( M_unit - y_t ) * K.reshape ( K.tile(weights_list,[batchsize]) , (batchsize, num_classes) )
        
         # Einstein notations allow to compute easily the functions components
         # without complex block-matrix multiplication
-        M_pairwise = tf.einsum('ij,ik->ijk', M1, y_t) #shape(2,12,12)
-        M_large = tf.einsum('ij,ik->ijk', M_unit , y_p) #shape(2,12,12)
+        M_pairwise = tf.einsum('ij,ik->ijk', M1, y_t) #shape(batchsize,num_classes,num_classes)
+        M_large = tf.einsum('ij,ik->ijk', M_unit , y_p) #shape(batchsize,num_classes,num_classes)
 
         
-        M_diff = K.exp(K.permute_dimensions (M_large, (0,2,1)) - M_large) #shape(2,12,12)
+        M_diff = K.exp(K.permute_dimensions (M_large, (0,2,1)) - M_large) #shape(batchsize,num_classes,num_classes)
 
 
-        M = M_pairwise*M_diff #shape(2,12,12)
+        M = M_pairwise*M_diff #shape(batchsize,num_classes,num_classes)
 
         return (K.mean(K.log(1 + K.sum(K.sum(M,2),1))))
     
