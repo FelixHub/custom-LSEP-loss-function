@@ -17,3 +17,4 @@ I had to rewrite the equation to make it more matrix-multiplication compatible, 
 I used 3d matrix to do parrallel calculation on each training sample, averaging only at the end.
 
 
+https://forums.fast.ai/t/lsep-as-a-loss-function/54506
